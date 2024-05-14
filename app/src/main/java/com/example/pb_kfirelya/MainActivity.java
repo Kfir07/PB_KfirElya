@@ -42,35 +42,35 @@ public class MainActivity extends AppCompatActivity {
         result = findViewById(R.id.result);
         pb = findViewById(R.id.progressBar);
         restart = findViewById(R.id.restart);
-        restart.setVisibility(View.INVISIBLE);
-        restart.setEnabled(false);
+        restart.setVisibility(View.INVISIBLE);//restarting button set invisible until game finished
+        restart.setEnabled(false);//restarting button not enabled
 
         rnd= new Random();
         value1= rnd.nextInt(11);
-        value2 = rnd.nextInt(11);
+        value2 = rnd.nextInt(11);//randomizing 2 values
         int temp = value1;
         value1 = Math.max(value1,value2);
-        value2 = Math.min(temp,value2);
+        value2 = Math.min(temp,value2);//bigger value is 1, smaller is 2
         v1.setText(String.valueOf(value1));
         v2.setText(String.valueOf(value2));
 
         pb.setProgress(120);
-        time.setText("Time Left: "+16+" seconds");
+        time.setText("Time Left: "+16+" seconds");//creating progress bar with timer of 16 seconds
         cdt = new CountDownTimer(16000,1000) {
             int progress = 16;
             @Override
             public void onTick(long l) {
                 progress--;
-                time.setText("Time Left: "+progress+" seconds");
+                time.setText("Time Left: "+progress+" seconds");//on each tick, one second passes and the progress bar is updated
                 pb.setProgress((int)progress*100/(10));
             }
 
             @Override
             public void onFinish() {
                 Toast.makeText(MainActivity.this,"Time is up", Toast.LENGTH_LONG).show();
-                v1.setVisibility(View.INVISIBLE);
+                v1.setVisibility(View.INVISIBLE);//when time is up, v1 and v2 textviews are set invisible
                 v2.setVisibility(View.INVISIBLE);
-                restart.setVisibility(View.VISIBLE);
+                restart.setVisibility(View.VISIBLE);//restart button set visible and enabled
                 restart.setEnabled(true);
             }
         };
@@ -80,35 +80,35 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int res = Integer.parseInt(String.valueOf(result.getText()));
-                if (String.valueOf(result.getText()) == null){
+                if (String.valueOf(result.getText()) == null){//if sent empty
                     Toast.makeText(MainActivity.this, "please provide answer", Toast.LENGTH_SHORT).show();
                     restart.setVisibility(View.VISIBLE);
                     restart.setEnabled(true);
                 }
-                else if (adding){
+                else if (adding){//if already answered this exercise
                     Toast.makeText(MainActivity.this, "Already answered", Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    if ((res) == value1+value2) {
-                        if (subbing) {
+                    if ((res) == value1+value2) {//if exercise is true
+                        if (subbing) {//if both exercises were answered correctly
                             Toast.makeText(MainActivity.this, "You Won!", Toast.LENGTH_SHORT).show();
-                            cdt.cancel();
-                            v1.setVisibility(View.INVISIBLE);
+                            cdt.cancel();//progress bar and timer paused
+                            v1.setVisibility(View.INVISIBLE);//when time is up, v1 and v2 textviews are set invisible
                             v2.setVisibility(View.INVISIBLE);
-                            restart.setVisibility(View.VISIBLE);
+                            restart.setVisibility(View.VISIBLE);//restart button set visible and enabled
                             restart.setEnabled(true);
                         }
-                        else {
+                        else {//if second exercise is still yet to be answered
                             adding = true;
                             Toast.makeText(MainActivity.this, "Answer Subbing Result", Toast.LENGTH_SHORT).show();
                         }
                     }
-                    else{
+                    else{//if exercise isn't true
                         Toast.makeText(MainActivity.this, "Wrong answer", Toast.LENGTH_SHORT).show();
-                        cdt.cancel();
-                        v1.setVisibility(View.INVISIBLE);
+                        cdt.cancel();//progress bar and timer paused
+                        v1.setVisibility(View.INVISIBLE);//when time is up, v1 and v2 textviews are set invisible
                         v2.setVisibility(View.INVISIBLE);
-                        restart.setVisibility(View.VISIBLE);
+                        restart.setVisibility(View.VISIBLE);//restart button set visible and enabled
                         restart.setEnabled(true);
                     }
                 }
@@ -118,35 +118,35 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int res = Integer.parseInt(String.valueOf(result.getText()));
-                if (String.valueOf(result.getText()) == null){
+                if (String.valueOf(result.getText()) == null){//if sent empty
                     Toast.makeText(MainActivity.this, "please provide answer", Toast.LENGTH_SHORT).show();
                     restart.setVisibility(View.VISIBLE);
                     restart.setEnabled(true);
                 }
-                else if (subbing){
+                else if (subbing){//if already answered this exercise
                     Toast.makeText(MainActivity.this, "Already answered", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     if (res == value1-value2) {
-                        if (adding) {
+                        if (adding) {//if both exercises were answered correctly
                             Toast.makeText(MainActivity.this, "You Won!", Toast.LENGTH_SHORT).show();
-                            cdt.cancel();
-                            v1.setVisibility(View.INVISIBLE);
+                            cdt.cancel();//progress bar and timer paused
+                            v1.setVisibility(View.INVISIBLE);//when time is up, v1 and v2 textviews are set invisible
                             v2.setVisibility(View.INVISIBLE);
-                            restart.setVisibility(View.VISIBLE);
+                            restart.setVisibility(View.VISIBLE);//restart button set visible and enabled
                             restart.setEnabled(true);
                         }
-                        else{
+                        else{//if second exercise is still yet to be answered
                             subbing = true;
                             Toast.makeText(MainActivity.this, "Answer Adding Result", Toast.LENGTH_SHORT).show();
                         }
                     }
-                    else{
+                    else{//if exercise isn't true
                         Toast.makeText(MainActivity.this, "Wrong answer", Toast.LENGTH_SHORT).show();
-                        cdt.cancel();
-                        v1.setVisibility(View.INVISIBLE);
+                        cdt.cancel();//progress bar and timer paused
+                        v1.setVisibility(View.INVISIBLE);//when time is up, v1 and v2 textviews are set invisible
                         v2.setVisibility(View.INVISIBLE);
-                        restart.setVisibility(View.VISIBLE);
+                        restart.setVisibility(View.VISIBLE);//restart button set visible and enabled
                         restart.setEnabled(true);
                     }
                 }
@@ -160,18 +160,18 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     public void restart(){
-        restart.setVisibility(View.INVISIBLE);
-        restart.setEnabled(false);
+        restart.setVisibility(View.INVISIBLE);//restarting button set invisible until game finished
+        restart.setEnabled(false);//restarting button not enabled
         v1.setVisibility(View.VISIBLE);
         v2.setVisibility(View.VISIBLE);
-        value1 = rnd.nextInt(11);
+        value1 = rnd.nextInt(11);//randomizing 2 values
         value2 = rnd.nextInt(11);
         int temp = value1;
-        value1 = Math.max(value1,value2);
+        value1 = Math.max(value1,value2);//bigger value is 1, smaller is 2
         value2 = Math.min(temp,value2);
         v1.setText(String.valueOf(value1));
         v2.setText(String.valueOf(value2));
-        pb.setProgress(120);
+        pb.setProgress(120);//creating progress bar with timer of 16 seconds
         adding = false;
         subbing = false;
         time.setText("Time Left: "+16+" seconds");
@@ -180,13 +180,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTick(long l) {
                 progress--;
-                time.setText("Time Left: "+progress+" seconds");
+                time.setText("Time Left: "+progress+" seconds");//on each tick, one second passes and the progress bar is updated
                 pb.setProgress((int)progress*100/(10));
             }
 
             @Override
             public void onFinish() {
                 Toast.makeText(MainActivity.this,"Time is up", Toast.LENGTH_LONG).show();
+                v1.setVisibility(View.INVISIBLE);//when time is up, v1 and v2 textviews are set invisible
+                v2.setVisibility(View.INVISIBLE);
+                restart.setVisibility(View.VISIBLE);//restart button set visible and enabled
+                restart.setEnabled(true);
             }
         };
         cdt.start();
